@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: roles
+
+key:
+  location: jwtRS256.pkcs8.pem
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
