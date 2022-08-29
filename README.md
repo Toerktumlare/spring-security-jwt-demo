@@ -9,13 +9,14 @@ demonstrates the handling of JWTs with different type of claims.
 
 # Test JWTs
 All JWTs below can be used against the service with different results. All tokens are generated from 
-(http://jwt.io) [jwt.io] using the private key `jwtRS256.rsa.key` and `jwtRS256.rsa.pem`. All JWTs have the same 
+(jwt.io) [http://jwt.io] using the private key `jwtRS256.rsa.key` and `jwtRS256.rsa.pem`. All JWTs have the same 
 header, what differs is in the body. Below is an example of the decoded JWT. All encoded JWTs in this file is based of 
 the de-encoded one below with small differences. We use the `jwtRS256.pkcs8.pem` public key to verify the signature in
 our spring application.
 
-You can check these differences if you call the [http://localhost:8080/token](http://localhost:8080/token) endpoint,
-and it will return the token that the service has parsed in a slightly more readable format (principal).
+You can check these differences if you do a get request with one of the tokens against the [http://localhost:8080/token]
+(http://localhost:8080/token) endpoint, and it will return the token that the service has parsed in a slightly more 
+readable format (principal).
 
 > If you want to use the Role based JWTs you need to start the service with the profile "roles" enabled. See the
 > `application.yml` in the `src/main/resources/` folder
