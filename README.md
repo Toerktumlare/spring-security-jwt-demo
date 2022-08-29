@@ -7,17 +7,15 @@ demonstrates the handling of JWTs with different type of claims.
 - Java 17
 - Maven 3
 
----
-
 # Test JWTs
-All JWTs in this file can be used against the service with different results. All tokens are generated from 
+All JWTs below can be used against the service with different results. All tokens are generated from 
 (http://jwt.io) [jwt.io] using the private key `jwtRS256.rsa.key` and `jwtRS256.rsa.pem`. All JWTs have the same 
 header, what differs is in the body. Below is an example of the decoded JWT. All encoded JWTs in this file is based of 
 the de-encoded one below with small differences. We use the `jwtRS256.pkcs8.pem` public key to verify the signature in
 our spring application.
 
 You can check these differences if you call the [http://localhost:8080/token](http://localhost:8080/token) endpoint,
-and it will give you back the token that the service has parsed in a slightly more readable format (principal).
+and it will return the token that the service has parsed in a slightly more readable format (principal).
 
 > If you want to use the Role based JWTs you need to start the service with the profile "roles" enabled. See the
 > `application.yml` in the `src/main/resources/` folder
@@ -55,8 +53,6 @@ While this token has both `read` and `write` scope, so it can be used on both th
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vZm9vYmFyLmNvbSIsInN1YiI6ImZvbyIsImF1ZCI6ImZvb2JhciIsIm5hbWUiOiJNciBGb28gQmFyIiwic2NvcGUiOiJyZWFkIHdyaXRlIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjI1MDAwMDAwMDB9.QOBDxzjN16cgKBhf7nWk4DRs1vDnajYnVMijlwfJ_b8f7_gRJa5z3N-hNyK_S0vFR12SWrDRtaeuDqTCGjteoYO6xBwVq0hfyowieb9vK5ekTKfkIhxGIAosHfzNyXBguaYLCPo-ihh-vgmUaRtZXCBVjHWtcMEeWfoiTm8D0LhJJPj4s0TfC3DVJj9s1gr8W7EFXvR4Or6M-yOGOr39QZV8S-rMuVECs26AHWmkDJ1C1aF5_02mHY33T-csR7t7t9PQfZ35VNCin7yr35buDKCFbcVFt5OE_if5LqJouT3qCLBXkSIGqQy1u601QwDKbQS9dXfnvAjp7VvHibe9n89QJtJ526OY5EpnaW4QrfXfKFzF1oxfTtCNxn2qbi2bHB2YBT4AUkxVD3B5tjMjhkpwwweETa_VjrQvM7BJlz3VEl1d2V99C50p1s_HfTCxkwLaDK6JFRgaHSpIY63bb41p8_VgQlDO-maHjjN5_YoEUSV3dVWizvrn2RsmrM5FLszKCGGdksHSlGvGocsrUgZ27q0d1quKL0K1jrUSrUFV89QnHkspifqAUJqRjO4UO1qJ-1gcaKX7gMS7O1g7nAnMDlMLAwuNQ4vcEJanG2Bw7Lc-NTyp1UIsn56Rj22YjbwUOZx5NNnPHjVvxRMBLxujtTZl5oHA6FQP9NsSqD4
 ```
 
----
-
 ## Role based JWTs
 To use the role based JWT you need to run the application with the profile `roles` activated. You can set this in
 the `application.yml`.
@@ -74,8 +70,6 @@ which means it can be used on both the `/user` endpoint but also the `/admin` en
 ```
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwOi8vZm9vYmFyLmNvbSIsInN1YiI6ImZvbyIsImF1ZCI6ImZvb2JhciIsIm5hbWUiOiJNciBGb28gQmFyIiwiYXV0aG9yaXRpZXMiOiJ1c2VyIGFkbWluIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjI1MDAwMDAwMDB9.QgefB__AkWGuMFnvbLZJitjNGnY43vi7matAR3HEZcWU3ENLzj6P2FQcxsYQ_s6CCSZLgE_nBiAD3xbeSDYOqzPoLtHvOORsXSEjUCP8EcmBs62-jAVUI0nWGDywoBhT48mqltQbqfapjEumORMTX7MWdiN9KJDqXxhWckj_Q-rQzJkSIDNM9fBvUGkNRF1nH4xIDqJ2qbcJGK129LlfvXHui87xBmzqqpvXdhcxuelV0n6WjZO1GowKRFlod3FF5RwRY3sggO00BCCOi9nrzDqBgP-WgcKcTXl-NpFHZ6yyODdcJkp21_1c7rzwxj23xm2zB2S9OvUU-Y8g1UzTBtuo8fs4CxpPyuOYg1kNaKwv9A1oHbxF8s-NnYE1eq1VFjVLgiIfhJKk4QySPPtXs8roP3Yu_gWYWHHRjDkCBVimCvnjS4KgFctEzxR57d7uBwyONz4Yq7vp_8CkPYWeP-cSupa35GzPz4eI5wumENun0OrkpLqkdO7J2n7gKHHOJsil0ozeQBMQ_CFhvWXnXT9pAm5V6Jp0gH4d6SJwV0iyYWkUoylbeXHM-imXvI63mfPZ8oqRhv6zj3DqXtKntZWSvzZ73bbmvpo1QPfXGO_bc9jq0YM_5C8wutEDX3H6pJBREKwGTBk9Wujzs8jxsuNzwSPagLRXCl3McvH7Mo4
 ```
-
----
 
 ## No authority JWT
 This token contains no `scope` or `authority` claim. So it can only be used on the `/token` endpoint.
