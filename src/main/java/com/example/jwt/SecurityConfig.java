@@ -28,10 +28,10 @@ public class SecurityConfig {
      * Set up a security filter chain and configure the access levels for the different endpoints in
      * {@see MainController}. We then configure our application into a "Resource Server" that accepts "JWT"s
      *
-     * Different endpoints have different access levels and you can find the proper JWT to use in the jwt.md.txt file in
-     * the src/main/java/resources folder.
+     * Different endpoints have different access levels and you can find demo JWTs to use in the README.md file in
+     * the root of this project.
      *
-     * You can always do a request to /principal to have a look at how Spring Security has parsed the given token.
+     * You can always do a request to /token to have a look at how Spring Security has parsed the given token.
      *
      * @param httpSecurity
      * @return SecurityFilterChain
@@ -60,9 +60,9 @@ public class SecurityConfig {
      * Our decoder can be customized with several options. We can for instance do custom validation on claims, do
      * rename, add and remove claims, and even change the datatype that the claim is mapped too.
      *
-     * All we do below is to add some custom validation to the "issuer" claim, but we must also remember to add the
-     * default timestamp validation as we have overridden defaults. Per default a Public key will set the algorithm
-     * to RS256. If you want something different you can set this explicitly.
+     * All we do below is to add some custom validation to the "issuer" claim and a custom validator to validate the aud claim, 
+     * remember we must add the default timestamp validation back as we have overridden defaults. 
+     * Per default a Public key will set the algorithm to RS256. If you want something different you can set this explicitly.
      *
      * @return JwtDecoder
      */
@@ -76,12 +76,13 @@ public class SecurityConfig {
 
     /**
      * We can write custom validators to validate different parts of the JWT. Per default, the framework will always
-     * validate the timestamp, but we can add more validators to enhance security. For instance you should always
-     * validate the issuer to make sure that the JWT was issued from a known source.
+     * validate the timestamp, but we can add validators to enhance security. For instance you should always
+     * validate the issuer to make sure that the JWT was issued from a known source. Remember that if we customise the
+     * validation we need to re-add the timestamp validator.
      *
      * Here we crate a list of validators. The {@see JwtTimestampValidator} and the {@see JwtIssuerValidator} are
      * from the spring security framework, but we have also added a custom one. Remember if you add a custom list, you
-     * must always remember to add timestamp validation as this will be removed.
+     * must always remember to add timestamp validation or else this will be removed.
      *
      * We then place these in a {@see DelegatingOAuth2TokenValidator} that we can set to our {@see JwtDecoder}.
      *
@@ -96,7 +97,7 @@ public class SecurityConfig {
     }
 
     /**
-     * You can add custom validation by adding a {@see JwtClaimValidator} for instance below we add a custom
+     * You can write a custom validation by adding a {@see JwtClaimValidator} for instance below we add a custom
      * validator to the aud (audience) claim. And check that it contains a certain string.
      * {@see OAuth2TokenIntrospectionClaimNames} contains static string names of several default claims. Below we are
      * referencing the {@see OAuth2TokenIntrospectionClaimNames#AUD} string.
