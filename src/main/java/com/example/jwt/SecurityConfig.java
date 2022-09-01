@@ -28,8 +28,8 @@ public class SecurityConfig {
      * Set up a security filter chain and configure the access levels for the different endpoints in
      * {@see MainController}. We then configure our application into a "Resource Server" that accepts "JWT"s
      *
-     * Different endpoints have different access levels and you can find demo JWTs to use in the README.md file in
-     * the root of this project.
+     * Different endpoints have different access levels, and you can find demo JWTs to use in the README.md
+     * file in the root of this project.
      *
      * You can always do a request to /token to have a look at how Spring Security has parsed the given token.
      *
