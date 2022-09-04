@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: roles
+#    active: roles
 
 key:
   location: jwtRS256.pkcs8.pem
