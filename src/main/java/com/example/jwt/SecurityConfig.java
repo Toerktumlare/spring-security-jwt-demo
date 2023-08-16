@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
@@ -41,13 +42,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(authorize ->
             authorize
-                    .mvcMatchers("/read/**").hasAuthority("SCOPE_read")
-                    .mvcMatchers("/write/**").hasAuthority("SCOPE_write")
-                    .mvcMatchers("/user/**").hasAnyRole("user", "admin")
-                    .mvcMatchers("/admin/**").hasRole("admin")
+                    .requestMatchers("/read/**").hasAuthority("SCOPE_read")
+                    .requestMatchers("/write/**").hasAuthority("SCOPE_write")
+                    .requestMatchers("/user/**").hasAnyRole("user", "admin")
+                    .requestMatchers("/admin/**").hasRole("admin")
                     .anyRequest().authenticated()
         )
-        .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+        .oauth2ResourceServer(configure -> configure.jwt(Customizer.withDefaults()))
         .build();
     }
 
